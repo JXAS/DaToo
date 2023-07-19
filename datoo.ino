@@ -1,9 +1,12 @@
 // datoo.ino
 #define VERSION 3
-#define RELEASE 0 
+#define RELEASE 0
+#define USB_BAUD 9600 
 
 void setup() {
-  // put your setup code here, to run once:
+ Serial.begin(USB_BAUD);
+ Serial.printf("USB Baud Set to %u bauds\n",USB_BAUD);
+ Serial.printf("DATOO Version : %u.%u\n",VERSION,RELEASE);
 
 }
 
