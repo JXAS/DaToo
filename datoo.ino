@@ -1,4 +1,4 @@
-// datoo.c
+// datoo.ino
 #define VERSION 3
 #define RELEASE 0 
 
