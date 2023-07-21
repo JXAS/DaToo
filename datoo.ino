@@ -1,4 +1,4 @@
-// datoo.ino
+// datoo.ino : Main programm
 // by R.C.Schmidt (c)2023
 
 #define VERSION 3
@@ -115,9 +115,45 @@ struct sprinkle my_sprinkle[2];
 struct TM my_TM;
 struct XBee X;
 
+int looptime;
+int m,n;
+char conf[250];
+
 //char TMhex[2*sizeof(my_TM)];
 char TMhex[500];
 char TMXbee_str[NB_XBEE*sizeof(my_TM.TMX)];
+
+int init_TM (void)
+{
+
+   my_stream.version=RELEASE + VERSION*256;
+   my_stream.xbee_detected=15;
+   my_stream.ios=0x0589;
+   my_TM.counter=0;
+   my_TM.fail=0;
+   my_TM.rssi=0; //seront generes par AT+CSQ
+   my_TM.ber=0;
+   my_TM.scan_period=looptime;
+   my_TM.here=0;
+   my_TM.portin=0;
+
+   for (n=0;n<NB_XBEE;n++)
+   {
+	   strncpy(my_xbee_module[n].module_id,conf+16+(12*n),8);
+      my_xbee_module[n].module_id[8]=0;
+	   my_xbee_module[n].local_temp=0;
+	   my_xbee_module[n].analog_input=0;
+	   my_xbee_module[n].battery=0;
+	   my_xbee_module[n].xbee_alarm_count=0;
+      strcpy(my_TM.TMX[n].temp_local,"0000");
+      strcpy(my_TM.TMX[n].analog2,"0000");
+      strcpy(my_TM.TMX[n].battery,"0000");
+      strcpy(my_TM.TMX[n].ios,"0000");
+      my_TM.TMX[n].alarm_hit=0;
+   }
+
+return 0;
+}
 
 void GetCommandFromWeb (void)
 {
@@ -135,7 +171,7 @@ void GetDateFromWeb (void)
 {
 }
 
-void ParseCommand (void
+void ParseCommand (void)
 {
 }
 
