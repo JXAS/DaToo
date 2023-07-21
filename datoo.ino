@@ -2,7 +2,7 @@
 // by R.C.Schmidt (c)2023
 
 #define VERSION 3
-#define RELEASE 0
+#define RELEASE 1
 #define USB_BAUD 9600
 
 #define SIGNATURE  0x22091959
